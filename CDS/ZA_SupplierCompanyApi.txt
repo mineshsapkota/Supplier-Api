@@ -1,0 +1,61 @@
+@AbapCatalog.sqlViewName: 'ZASUPCOMPAPI'
+@AbapCatalog.compiler.compareFilter: true
+@AccessControl.authorizationCheck:#CHECK
+@AccessControl.personalData.blocking: #REQUIRED
+@ClientHandling.algorithm: #SESSION_VARIABLE
+@Metadata.ignorePropagatedAnnotations:true
+@EndUserText.label: 'Supplier Company'
+@VDM.viewType: #CONSUMPTION
+@VDM.lifecycle.contract.type:#PUBLIC_REMOTE_API
+@ObjectModel.usageType.serviceQuality: #C
+@ObjectModel.usageType.sizeCategory: #XXL
+@ObjectModel.usageType.dataClass: #MASTER
+ 
+define view ZA_SupplierCompanyApi as select from I_SupplierCompany
+
+association[1..1] to ZA_SupplierApi as _Supplier on $projection.Supplier = _Supplier.Supplier
+{
+
+    key Supplier, 
+    key CompanyCode, 
+     AuthorizationGroup, 
+     @ObjectModel.readOnly: true
+     CompanyCodeName, 
+     PaymentBlockingReason, 
+     SupplierIsBlockedForPosting, 
+     AccountingClerk, 
+     AccountingClerkFaxNumber, 
+     AccountingClerkPhoneNumber, 
+     SupplierClerk, 
+     SupplierClerkURL, 
+     PaymentMethodsList, 
+     PaymentTerms, 
+     ClearCustomerSupplier, 
+     IsToBeLocallyProcessed, 
+     ItemIsToBePaidSeparately, 
+     PaymentIsToBeSentByEDI, 
+     HouseBank, 
+     CheckPaidDurationInDays, 
+     @Semantics.currencyCode: true
+     Currency,
+     @Semantics.amount.currencyCode: 'Currency'  
+     BillOfExchLmtAmtInCoCodeCrcy, 
+     SupplierClerkIDBySupplier, 
+     ReconciliationAccount, 
+     InterestCalculationCode, 
+     InterestCalculationDate, 
+     IntrstCalcFrequencyInMonths, 
+     SupplierHeadOffice, 
+     AlternativePayee, 
+     LayoutSortingRule, 
+     APARToleranceGroup, 
+     SupplierCertificationDate, 
+     SupplierAccountNote, 
+     WithholdingTaxCountry, 
+     DeletionIndicator, 
+     CashPlanningGroup, 
+     IsToBeCheckedForDuplicates,
+     MinorityGroup,
+    
+     _Supplier
+}
