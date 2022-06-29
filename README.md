@@ -1,4 +1,9 @@
-# Supplier-Api
+# Supplier-Api- [Supplier-Api](#supplier-api)
+  - [Context](#context)
+  - [Requirement](#requirement)
+  - [Solution](#solution)
+    - [1. Use CDS Views and SEGW Project to generate OData API](#1-use-cds-views-and-segw-project-to-generate-odata-api)
+    - [2. Use CDS Annotation @OData.publish](#2-use-cds-annotation-odatapublish)
 ## Context
 All the supplier data is in the S4/HANA standard tables
 
@@ -21,32 +26,32 @@ A step by step guidelines on developing the above mentioned requirement.
 6. Activate all the CDS views
 7. Create SEGW project using the Tcode: segw.
    
-![SEGW_CREATE](Segw%20Project/segw_create_project.png)
+![SEGW_CREATE](CDS/Segw%20Project/img/segw_create_project.png)
 
 1. Use the RDS approach and map the created CDS view [ZA_SupplierApi](../Supplier-Api/CDS/DDL/ZA_SupplierApi.txt).
 
-![SEGW_MAP](Segw%20Project/segw_map_cds_view_as_reference.png)
+![SEGW_MAP](CDS/Segw%20Project/img/segw_map_cds_view_as_reference.png)
 
 9. Generate runtime objects for the SEGW project.
 
-![GENERATE_RUNTIME](Segw%20Project/generate_runtime_artifacts.png)
+![GENERATE_RUNTIME](CDS/Segw%20Project/img/generate_runtime_artifacts.png)
 
 10.  Register SEGW project as an OData service in "Activate and Maintain Services" GUI using T Code: /IWFND/MAINT_SERVICE
 11.  Add SEGW Project as an OData service.
 
-![Add service](Segw%20Project/register_segw_project_as_odata.png)
+![Add service](CDS/Segw%20Project/img/register_segw_project_as_odata.png)
 
 ![Activate](Segw%20Project/odata_service_create_success.png)
 
 12. Access the service in "Activate & Maintain Service" GUI.
 
-![Maintain](Segw%20Project/activate_service.png)
+![Maintain](CDS/Segw%20Project/img/activate_service.png)
 
 12. Launch the Gateway client to test the OData service.
 
-![Metadata Test](Segw%20Project/test_metadata_call_gw_client.png)
+![Metadata Test](CDS/Segw%20Project/img/test_metadata_call_gw_client.png)
 
-![Entity Test](Segw%20Project/test_supplier_api_entity.png)
+![Entity Test](CDS/Segw%20Project/img/test_supplier_api_entity.png)
 
 13. A succesful run of API as $metadata call.
 
@@ -358,3 +363,23 @@ A step by step guidelines on developing the above mentioned requirement.
 
 ```
 
+### 2. Use CDS Annotation @OData.publish
+
+We can automatically create an OData service on top of the CDS view using an annotation `@OData.publish:true`.
+
+![CREATE_WITH_ANNOTATIONS](CDS/Segw%20Project/img/annotation_auto_publish.png)
+
+On Activation of CDS view an OData service will be automatically generated with the name <CDS_View_name>_CDS.
+
+OData service created via this annotations has below limitations.
+
+1. This API will be a read only API and if in future an enhancement to support CUD is required then we cannot enhance it.
+2. Multilevel associations/navigation is not supported.
+
+As per the requirement of read only and a simple supplier master data API we can also design our OData service using this approach.
+
+A CDS view [ZA_SupApiCdsAnnotation](../Supplier-Api/CDS/DDL/ZA_SupApiCdsAnnotation.txt) is created with annotation `@OData.publish: true` and the OData service is available as shown below.
+
+![AUTO_PUBLISH](CDS/Segw%20Project/img/automatic_odata_service.png)
+
+![TEST_AUTO_PUBLISH](CDS/Segw%20Project/img/test_auto_publish.png)
