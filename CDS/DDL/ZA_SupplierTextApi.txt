@@ -1,0 +1,42 @@
+/*******************************************************
+** Consumption view to expose supplier text as API **
+*******************************************************/
+@ClientHandling.algorithm:#SESSION_VARIABLE
+@EndUserText.label: 'Supplier Text'
+@VDM: {
+  viewType: #COMPOSITE,
+  lifecycle.contract.type: #PUBLIC_REMOTE_API
+}
+@AbapCatalog: {
+  sqlViewName: 'ZASUPTEXTAPI',
+  compiler.compareFilter: true,
+  preserveKey:true
+}
+@AccessControl: {
+  authorizationCheck: #CHECK
+}
+@ObjectModel: {
+   createEnabled: false,
+   updateEnabled: false,
+   deleteEnabled: false,
+   usageType: {
+     dataClass:      #TRANSACTIONAL,
+     serviceQuality: #C,
+     sizeCategory:   #L
+   }
+}
+
+define view ZA_SupplierTextApi as select from P_SupplierText as SupplierText
+  association [1..1] to ZA_SupplierApi as _Supplier on _Supplier.Supplier = $projection.Supplier
+{
+      @ObjectModel.readOnly: true
+  key SupplierText.Supplier,
+  key SupplierText.Language,
+  key LongTextID,
+      @ObjectModel.readOnly: true
+      @ObjectModel.virtualElement
+      //Long text cannot be part of CDS view hence they will be calculated by Abap class
+      @ObjectModel.virtualElementCalculatedBy: 'ABAP:CL_BP_S4H_STXL_READ'
+      LongText,
+      _Supplier
+}
