@@ -1,4 +1,4 @@
-# Supplier-Api- [Supplier-Api](#supplier-api)
+# Supplier-Api
   - [Context](#context)
   - [Requirement](#requirement)
   - [Solution](#solution)
