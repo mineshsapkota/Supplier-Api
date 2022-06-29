@@ -1,0 +1,57 @@
+/********************************************************************
+** Consumption view for supplier purchasing organization ***
+******************************************************************/
+
+@AbapCatalog.sqlViewName: 'ZASUPPURCHAPI'
+@AbapCatalog.compiler.compareFilter: true
+@AccessControl.authorizationCheck:#CHECK
+@AccessControl.personalData.blocking: #REQUIRED
+@ClientHandling.algorithm: #SESSION_VARIABLE
+@Metadata.ignorePropagatedAnnotations:true
+@EndUserText.label: 'Supplier Purchasing Organization'
+@VDM.viewType: #BASIC
+@VDM.lifecycle.contract.type:#PUBLIC_REMOTE_API
+@ObjectModel.usageType.serviceQuality: #A
+@ObjectModel.usageType.sizeCategory: #XXL
+@ObjectModel.usageType.dataClass: #MASTER
+
+define view ZA_SupplierPurchasingOrgApi as select from I_SupplierPurchasingOrg
+
+
+association[1..1] to ZA_SupplierApi as _Supplier on $projection.Supplier = _Supplier.Supplier
+                       
+  {
+  key Supplier,
+  key PurchasingOrganization,
+  CalculationSchemaGroupCode, 
+  DeletionIndicator, 
+  IncotermsClassification, 
+  IncotermsTransferLocation,
+  IncotermsVersion,
+  IncotermsLocation1,
+  IncotermsLocation2,
+  InvoiceIsGoodsReceiptBased, 
+  MaterialPlannedDeliveryDurn,
+  @Semantics.amount.currencyCode: 'PurchaseOrderCurrency' 
+  MinimumOrderAmount, 
+  PaymentTerms, 
+  PricingDateControl, 
+  PurOrdAutoGenerationIsAllowed, 
+  PurchaseOrderCurrency, 
+  PurchasingGroup, 
+  PurchasingIsBlockedForSupplier,  
+  ShippingCondition, 
+  SupplierABCClassificationCode, 
+  SupplierPhoneNumber, 
+  SupplierRespSalesPersonName,
+  SupplierConfirmationControlKey,
+  IsOrderAcknRqd,
+  //below properties are used for authorization check in DCL
+  //@Consumption.hidden: true
+  _Supplier.AuthorizationGroup,
+  //@Consumption.hidden: true
+  _Supplier.SupplierAccountGroup,
+
+  _Supplier
+
+  }
