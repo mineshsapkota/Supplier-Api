@@ -1,2 +1,2 @@
 # Supplier-Api
-Supplier API Assignment
+Supplier API Assignment Details
