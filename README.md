@@ -17,13 +17,13 @@ A step by step guidelines on developing the above mentioned requirement.
 2. Search for a released CDS view from SAP for a supplier table in SAP Business Hub.
 3. I_Supplier CDS view is released by CDS and is available for consumption.
 4. Similarly search for corresponding supplier dependent relationship tables(lfb1, lfm1) released CDS views. Available released views from SAP are I_SupplierCompany and I_SupplierPurchasingOrg.
-5. Create a consumption views for each released SAP CDS views for designing an APi. In our assignment we have created and modelled this consumption views as [ZA_SupplierApi](../Supplier-Api/CDS/DDL/ZA_SupplierApi.txt), ["ZA_SupplierCompanyApi"](../Supplier-Api/CDS/DDL/ZA_SupplierCompanyApi.txt), [ZA_SupplierPurchasingOrgApi](../Supplier-Api/CDS/DDL/ZA_SupplierPurchasingOrgApi.txt) and [ZA_SupplierTextApi](../Supplier-Api/CDS/DDL/ZA_SupplierTextApi.txt).
+5. Create a consumption views for each released SAP CDS views for designing an APi. In our assignment we have created and modelled this consumption views as [ZA_SupplierApi](../Supplier-Api/CDS/DDL/ZA_SupplierApi.txt), [ZA_SupplierCompanyApi](../Supplier-Api/CDS/DDL/ZA_SupplierCompanyApi.txt), [ZA_SupplierPurchasingOrgApi](../Supplier-Api/CDS/DDL/ZA_SupplierPurchasingOrgApi.txt) and [ZA_SupplierTextApi](../Supplier-Api/CDS/DDL/ZA_SupplierTextApi.txt).
 6. Activate all the CDS views
 7. Create SEGW project using the Tcode: segw.
-
+   
 ![SEGW_CREATE](../Supplier-Api/Segw%20Project/segw_create_project.png)
 
-8. Use the RDS approach and map the created CDS view [ZA_SupplierApi](../Supplier-Api/CDS/DDL/ZA_SupplierApi.txt).
+1. Use the RDS approach and map the created CDS view [ZA_SupplierApi](../Supplier-Api/CDS/DDL/ZA_SupplierApi.txt).
 
 ![SEGW_MAP](Segw%20Project/segw_map_cds_view_as_reference.png)
 
