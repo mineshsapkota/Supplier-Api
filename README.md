@@ -21,7 +21,7 @@ A step by step guidelines on developing the above mentioned requirement.
 6. Activate all the CDS views
 7. Create SEGW project using the Tcode: segw.
    
-![SEGW_CREATE](../Supplier-Api/Segw%20Project/segw_create_project.png)
+![SEGW_CREATE](Segw%20Project/segw_create_project.png)
 
 1. Use the RDS approach and map the created CDS view [ZA_SupplierApi](../Supplier-Api/CDS/DDL/ZA_SupplierApi.txt).
 
