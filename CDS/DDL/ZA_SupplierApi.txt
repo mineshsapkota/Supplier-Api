@@ -9,13 +9,14 @@
 @EndUserText.label: 'Supplier'
 @VDM.viewType: #CONSUMPTION
 @VDM.lifecycle.contract.type:#PUBLIC_REMOTE_API
+// Create, Update and Delete is set to false as we are developing a read only API
 @ObjectModel: {
    createEnabled: false,
    updateEnabled: false,
    deleteEnabled:false,
    usageType: {
      dataClass:      #MASTER,
-     serviceQuality: #A,
+     serviceQuality: #C,
      sizeCategory:   #XL
    }
 }
