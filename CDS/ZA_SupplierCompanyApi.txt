@@ -1,3 +1,7 @@
+/********************************************************************
+** Consumption CDS view to read Supplier Company details **
+*****************************************************************/
+
 @AbapCatalog.sqlViewName: 'ZASUPCOMPAPI'
 @AbapCatalog.compiler.compareFilter: true
 @AccessControl.authorizationCheck:#CHECK
