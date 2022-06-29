@@ -11,9 +11,16 @@
 @EndUserText.label: 'Supplier Purchasing Organization'
 @VDM.viewType: #BASIC
 @VDM.lifecycle.contract.type:#PUBLIC_REMOTE_API
-@ObjectModel.usageType.serviceQuality: #A
-@ObjectModel.usageType.sizeCategory: #XXL
-@ObjectModel.usageType.dataClass: #MASTER
+@ObjectModel: {
+   createEnabled: false,
+   updateEnabled: false,
+   deleteEnabled: false,
+   usageType: {
+     dataClass:      #MASTER,
+     serviceQuality: #C,
+     sizeCategory:   #XXL
+   }
+}
 
 define view ZA_SupplierPurchasingOrgApi as select from I_SupplierPurchasingOrg
 

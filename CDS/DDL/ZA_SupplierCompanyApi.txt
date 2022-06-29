@@ -11,9 +11,16 @@
 @EndUserText.label: 'Supplier Company'
 @VDM.viewType: #CONSUMPTION
 @VDM.lifecycle.contract.type:#PUBLIC_REMOTE_API
-@ObjectModel.usageType.serviceQuality: #C
-@ObjectModel.usageType.sizeCategory: #XXL
-@ObjectModel.usageType.dataClass: #MASTER
+@ObjectModel: {
+   createEnabled: false,
+   updateEnabled: false,
+   deleteEnabled: false,
+   usageType: {
+     dataClass:      #MASTER,
+     serviceQuality: #C,
+     sizeCategory:   #XXL
+   }
+}
  
 define view ZA_SupplierCompanyApi as select from I_SupplierCompany
 
