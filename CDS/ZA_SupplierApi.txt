@@ -1,0 +1,88 @@
+/*****************************************************************************************
+*** Consumption CDS view to expose Supplier Table data out of S/4 HANA as an OData API
+*** Create
+******************************************************************************************/
+@AbapCatalog.sqlViewName: 'ZASUPAPI'
+@AbapCatalog.compiler.compareFilter: true
+@AbapCatalog.preserveKey: true
+@AccessControl.authorizationCheck: #CHECK
+@EndUserText.label: 'Supplier'
+@VDM.viewType: #CONSUMPTION
+@VDM.lifecycle.contract.type:#PUBLIC_REMOTE_API
+@ObjectModel: {
+   createEnabled: false,
+   updateEnabled: false,
+   deleteEnabled:false,
+   usageType: {
+     dataClass:      #MASTER,
+     serviceQuality: #A,
+     sizeCategory:   #XL
+   }
+}
+define view ZA_SupplierApi as select from I_Supplier 
+
+//Association to bring exyended fields as part of API
+association [0..1] to E_Supplier as _SupplierExtension on $projection.Supplier = _SupplierExtension.Supplier
+
+//Association to read the supplier company details
+association [0..*] to ZA_SupplierCompanyApi as _SupplierCompany on $projection.Supplier =  _SupplierCompany.Supplier
+
+//Association to read supplier purchasing organization details
+association [0..*] to ZA_SupplierPurchasingOrgApi as _SupplierPurchasingOrg on $projection.Supplier =  _SupplierPurchasingOrg.Supplier
+
+//Association to read supplier long text in different language
+association [0..*] to ZA_SupplierTextApi as _SupplierText on $projection.Supplier = _SupplierText.Supplier{
+  key Supplier,
+AlternativePayeeAccountNumber, 
+AuthorizationGroup, 
+@ObjectModel.readOnly: true
+CreatedByUser,
+@ObjectModel.readOnly: true 
+CreationDate, 
+Customer, 
+PaymentIsBlockedForSupplier, 
+PostingIsBlocked, 
+PurchasingIsBlocked,  
+SupplierAccountGroup, 
+@ObjectModel.readOnly: true 
+SupplierFullName,  
+@ObjectModel.readOnly: true
+SupplierName, 
+VATRegistration,
+BirthDate,  
+@ObjectModel.readOnly: true
+ConcatenatedInternationalLocNo, 
+DeletionIndicator, 
+FiscalAddress, 
+@ObjectModel.readOnly: true
+Industry, 
+InternationalLocationNumber1, 
+InternationalLocationNumber2, 
+InternationalLocationNumber3, 
+IsNaturalPerson,  
+ResponsibleType, 
+SuplrQltyInProcmtCertfnValidTo, 
+SuplrQualityManagementSystem, 
+SupplierCorporateGroup, 
+SupplierProcurementBlock, 
+@ObjectModel.readOnly: true
+TaxNumber1, 
+@ObjectModel.readOnly: true
+TaxNumber2, 
+@ObjectModel.readOnly: true
+TaxNumber3, 
+@ObjectModel.readOnly: true
+TaxNumber4, 
+@ObjectModel.readOnly: true
+TaxNumber5, 
+TaxNumberResponsible, 
+TaxNumberType, 
+SuplrProofOfDelivRlvtCode,
+BR_TaxIsSplit,
+DataExchangeInstructionKey,
+
+/*associations*/
+_SupplierCompany,
+_SupplierPurchasingOrg,
+_SupplierText
+}
